@@ -14,7 +14,9 @@ authors:
   -name: Gretchen A. Macht, Ph.D.
   orcid: https://orcid.org/0000-0002-3222-1145
   affiliation: 1
-affiliations: Mechanical, Industrial &amp; Systems, University of Rhode Island
+affiliations: 
+  -name: Mechanical, Industrial &amp; Systems, University of Rhode Island
+  index: 1
 date: 19 November 2019
 bibliography: paper.bib
 ---
