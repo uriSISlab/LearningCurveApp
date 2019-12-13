@@ -1,5 +1,5 @@
 ---
-title: Learning ‘Learning Curves’ with R Shiny
+title: 'Learning ‘Learning Curves’ with R Shiny'
 tags:
   -R
   -human factors
@@ -9,10 +9,10 @@ tags:
   -LEGO&reg; construction
 authors:
   -name: Nicholas D. Bernardo
-  orcid: https://orcid.org/0000-0003-4104-8505
+  orcid: 0000-0003-4104-8505
   affiliation: 1
   -name: Gretchen A. Macht, Ph.D.
-  orcid: https://orcid.org/0000-0002-3222-1145
+  orcid: 0000-0002-3222-1145
   affiliation: 1
 affiliations: 
   -name: Mechanical, Industrial &amp; Systems, University of Rhode Island
