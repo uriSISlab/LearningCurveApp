@@ -29,7 +29,7 @@ R Shiny was utilized to streamline and standardize data entry, data organization
 
 In the presented R Shiny applications, there are two sections of the GUI: the left-side input panel and the right tabular/graphic data manipulation area. 
 
-The left panel's ‘Introduction’ tab displays a brief set of instructions on how to use the application. On the ‘Analysis’ tab, users can enter their name, select the color LEGO&reg; set that they will be building, and generate a report of all plots and data in the application. The ‘Analysis’ tab’s ‘Report Generation’ function within the assignment version of the app saves an html file to the user’s computer on which all plots, data, and equations are presented. This report allows for easy submission as part of a class assignment or to otherwise save the results of experimentation. 
+The left panel's ‘Introduction’ tab displays a brief set of instructions on how to use the application. On the ‘Analysis’ tab, users can enter their name and select the color LEGO&reg; set that they will be building. The ‘Analysis’ tab’s ‘Report Generation’ function within the assignment version of the app saves an html file to the user’s computer on which all plots, data, and equations are presented. This report allows for easy submission as part of a class assignment or to otherwise save the results of experimentation. 
 
 On the right panel, the ‘Data Entry’ tab's default display is a table available for data entry. Upon populating the entire data table, the remaining tabs of the right-hand panel (i.e., the ‘Individual Plot’ and ‘Combined Plot’ tabs) present plots of both the entered data and the fitted power curves (i.e., learning curves), as well as the formulas fit to each column of data.
 
