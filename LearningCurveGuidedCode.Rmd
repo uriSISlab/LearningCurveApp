@@ -1,0 +1,249 @@
+---
+title: "Learning Curve Report"
+output: html_document
+author: Your Name Here
+
+---
+```{r setup, include=FALSE}
+
+###WARNING: THE DOCUMENT WILL NOT KNIT UNLESS THE NameofTable DATA FRAME IS POPULATED WITH DATA.
+
+#This section of code initiates the file and configures some basic settings.
+knitr::opts_chunk$set(echo = TRUE)
+
+#First libraries containing functions that will be used must be loaded. If these are not already installed on your computer, use the function 'install.packages()' and type the name of the libraries within the parentheses.
+library(ggplot2)
+library(tidyr)
+```
+##Defining Variables
+```{r include=FALSE}
+LegoSetColor<- "green" #Type the color of the Lego set that you plan to build within the quotations
+
+NumberTrials<-16  #Type the number of trials (i.e., the number of times you plan to build each item) to the left of the hash symbol 
+```
+
+
+## Creating Table of Lego Sets
+First, we need to make a table in which we will input data. We do this by creating a data frame which will track the **Trials** and **Duration** for each Lego item within the set. Below is a sample data frame with only five Trials and Durations of arbitrary value:
+
+```{r echo=FALSE}
+data.frame(Trials = 1:NumberTrials,  
+           Set1 = c(62,96.48,49.47,59.03,48.47,31.5,37.37,31.58,33.92,34.75,34.67,36.08,31.55,26.08,31.38,32.03),
+           Set2 = c(102.07,86.17,56.2,64.38,56.12,38.45,50.22,46.78,41.02,39.37,42.08,43.27,40.55,49.17,40.5,42.28),
+           Set3 = c(51.67,58,36.75,36.05,34.72,35.43,37.42,38.87,31.58,29.35,33.47,41.53,35.7,26.65,37,38.93)
+           )
+```
+We can save this data frame by creating a variable name (i.e., **TestTbl**) and using the '<-' symbol as follows:
+
+```{r echo=FALSE}
+TestTbl<-data.frame(Trials = 1:16,  
+           Set1 = c(62,96.48,49.47,59.03,48.47,31.5,37.37,31.58,33.92,34.75,34.67,36.08,31.55,26.08,31.38,32.03),
+           Set2 = c(102.07,86.17,56.2,64.38,56.12,38.45,50.22,46.78,41.02,39.37,42.08,43.27,40.55,49.17,40.5,42.28),
+           Set3 = c(51.67,58,36.75,36.05,34.72,35.43,37.42,38.87,31.58,29.35,33.47,41.53,35.7,26.65,37,38.93)
+           )
+
+TestTbl 
+
+```
+
+Now create a data frame that represents the expected input for the Lego assignment with your variable names plugged in:
+```{r echo=FALSE}
+#Replace NameofTable with any name of your choosing that makes sense for the data. Include a column for each Lego Item being built, replacing Set1, Set2, and Set3.
+NameofTable<-data.frame(Trials = 1:NumberTrials,
+           Set1 = 0,
+           Set2 = 0,
+           Set3 = 0)
+
+NameofTable  #Replace this to the name of the data frame and hit ctrl+enter on this line of code.
+```
+
+##Graphing
+Now that you have successfully created a data frame containing your timing data, a visualization of this data can be created. To simplify this process, we need to put our data into a 'long' format as opposed to the 'wide' format that it is currently in. To do this, use the 'gather' command as demonstrated in the code chunk below:
+```{r echo=FALSE}
+TestTblLong<-gather(TestTbl, Lego_Item, Duration, 2:4)
+TestTblLong
+
+#Replace NameofTableLong with a name for your long data table. Replace NameofTable within the gather function to what you named your original data frame.
+NameofTableLong<-gather(NameofTable, Lego_Item, Duration, 2:4)
+NameofTableLong
+```
+
+
+Using the ggplot2 library, graphs are easily generated and manipulated to display the desired information. In the chunk of code below, an example graph is created and the template for the generation of your graph is provided: 
+```{r echo=FALSE}
+#In the code below, a graph is created using the Trials as the x-axis and the Duration as the y-axis with the Lego_items differentiated by color.
+ggplot(data = TestTblLong,aes(x = Trials,y = Duration,color = Lego_Item))+
+  geom_point(color = paste(LegoSetColor))+
+  geom_line()+
+  ggtitle(paste("LEGO Building Data EXAMPLE"))
+
+
+#Within the code below, replace NameofTableLong with the name of your long data and use the '$' symbol to identify which columns are your x, y, and what column you would like the graph to be colored by.
+ggplot(data = NameofTableLong,aes(x = Trials,y = Duration,color = Lego_Item))+
+  geom_point(color = paste(LegoSetColor))+
+  geom_line()+
+  ggtitle(paste("LEGO Building Data"))
+```
+##Fitting the Power Curve
+Now consider we want to fit a power curve to this data. This can be performed with several different methods, each with varying degrees of accuracy. Two of these methods are demonstrated below:
+
+###Method 1:
+The first method is the least accurate of the presented methods, but can be easily calculated. This method takes the first and last data points (or any two datapoints) for the x and y of a dataset and interpolates the power curve that hits both points. An example is performed on the test data below:
+```{r echo=FALSE}
+#Test Lego Item 1 Calculation
+x1 = TestTbl[1,1] #The first and last values in the 'Trials' column are assigned to x1 and x2. 
+x2 = TestTbl[15,1] #x1 and x2 are the same for each 'Lego_Item' calculation.
+y1_1 = TestTbl[1,2] #y1_1 and y1_2 are assigned to the first and last duration observations from the first 'Lego_Item'.
+y1_2 = TestTbl[15,2]
+
+n1 = (log10(y1_2)-log10(y1_1))/(log10(x2)-log10(x1)) #The formula to calculate the exponent, 'n1', in the power curve using the duration observations from column 1 of the data frame (y1_1 and y1_2). 
+k1 = y1_2/(x2^n1) #The formula to calculate for the coefficient of the power curve ising the duration observations from column 1 of the data frame (y1_1 and y1_2).
+
+paste(names(TestTbl)[2],": ","y = ",round(k1,2),"x^",round(n1,2)) #This line prints the formula for the power curve fit to the data in the first column of the test data frame.
+
+#Test Lego Item 2 Calculation
+y2_1 = TestTbl[1,3]
+y2_2 = TestTbl[15,3]
+
+n2 = (log10(y2_2)-log10(y2_1))/(log10(x2)-log10(x1))
+k2 = y2_2/(x2^n2)
+
+paste(names(TestTbl)[3],": ","y = ",round(k2,2),"x^",round(n2,2)) #This line prints the formula for the power curve fit to the data in the second column of the test data frame.
+
+#Test Lego Item 3 Calculation
+y3_1 = TestTbl[1,4]
+y3_2 = TestTbl[15,4]
+
+n3 = (log10(y3_2)-log10(y3_1))/(log10(x2)-log10(x1))
+k3 = y3_2/(x2^n3)
+
+paste(names(TestTbl)[4],": ","y = ",round(k3,2),"x^",round(n3,2)) #This line prints the formula for the power curve fit to the data in the third column of the test data frame.
+```
+The following section generates the power curve equations for your data frame:
+```{r echo=FALSE}
+#Within this chunk of code, replace the variable name 'NameofTable' with the name of your data frame. Do not change the 'x', 'y', 'n', or 'k' variables.
+#Lego Item 1 Calculation
+x1 = NameofTable[1,1] 
+x2 = NameofTable[NumberTrials-1,1]
+y1_1 = NameofTable[1,2]
+y1_2 = NameofTable[NumberTrials-1,2]
+
+n1 = (log10(y1_2)-log10(y1_1))/(log10(x2)-log10(x1))
+k1 = y1_2/(x2^n1)
+
+paste(names(NameofTable)[2],": ","y = ",round(k1,2),"x^",round(n1,2)) #This line prints the formula for the power curve fit to the data in the first column of your data frame.
+
+#Lego Item 2 Calculation
+y2_1 = NameofTable[1,3]
+y2_2 = NameofTable[NumberTrials-1,3]
+
+n2 = (log10(y2_2)-log10(y2_1))/(log10(x2)-log10(x1))
+k2 = y2_2/(x2^n2)
+
+paste(names(NameofTable)[3],": ","y = ",round(k2,2),"x^",round(n2,2)) #This line prints the formula for the power curve fit to the data in the second column of your data frame.
+
+#Lego Item 3 Calculation
+y3_1 = NameofTable[1,4]
+y3_2 = NameofTable[NumberTrials-1,4]
+
+n3 = (log10(y3_2)-log10(y3_1))/(log10(x2)-log10(x1))
+k3 = y3_2/(x2^n3)
+
+paste(names(NameofTable)[4],": ","y = ",round(k3,2),"x^",round(n3,2)) #This line prints the formula for the power curve fit to the data in the third column of your data frame.
+
+```
+
+###Method 2:
+The second method utilizes a curve fitting algorithm predefined in R. While this method requires less code to perform, the calculation is much more complex than Method 1 and provides a more robust and accurate result.
+
+The chunk below generates equations using the algorithmic approach for the 'TestTbl' dataset:
+```{r echo=FALSE}
+#nls is a nonlinear least-squares algorithm which fits data to a defined formula. In the line below, the equation is first defined 'Set1~k*Trials^n', the data set is identified 'data = TestTbl', and starting values to initiate the algorithms are defined 'start = list(k=1,n=1)'.
+nls(Set1~k*Trials^n,data = TestTbl,start = list(k=1,n=1))
+k<-coef(nls(Set1~k*Trials^n,data = TestTbl,start = list(k=1,n=1)))[1]
+n<-coef(nls(Set1~k*Trials^n,data = TestTbl,start = list(k=1,n=1)))[2]
+paste(names(TestTbl)[2],"y = ",round(k,2),"x^",round(n,2))
+
+#The 'y' is defined as the column name (i.e., 'Set2' in this case).
+nls(Set2~k*Trials^n,data = TestTbl,start = list(k=1,n=1))
+k<-coef(nls(Set2~k*Trials^n,data = TestTbl,start = list(k=1,n=1)))[1]
+n<-coef(nls(Set2~k*Trials^n,data = TestTbl,start = list(k=1,n=1)))[2]
+paste(names(TestTbl)[3],"y = ",round(k,2),"x^",round(n,2))
+
+#The 'y' is defined as the column name (i.e., 'Set3' in this case).
+nls(Set3~k*Trials^n,data = TestTbl,start = list(k=1,n=1))
+k<-coef(nls(Set3~k*Trials^n,data = TestTbl,start = list(k=1,n=1)))[1]
+n<-coef(nls(Set3~k*Trials^n,data = TestTbl,start = list(k=1,n=1)))[2]
+paste(names(TestTbl)[4],"y = ",round(k,2),"x^",round(n,2))
+```
+The following chunk generates algorithmically fitted equations for your dataset:
+```{r echo=FALSE}
+#Replace 'Set1' with the name of your first column of duration data. Replace NameofTable with the name of your original data frame. 
+nls(Set1~k*Trials^n,data = NameofTable,start = list(k=1,n=1))
+k<-coef(nls(Set1~k*Trials^n,data = NameofTable,start = list(k=1,n=1)))[1] #This line defines the coefficient 'k' to display the fitted equation. 
+n<-coef(nls(Set1~k*Trials^n,data = NameofTable,start = list(k=1,n=1)))[2] #This line defines the exponent 'n' to display the fitted equation. 
+paste(names(NameofTable)[2],": y = ",round(k,2),"x^",round(n,2))
+
+#Repeat as above, replacing 'Set2' with the name of the second column of duration data.
+nls(Set2~k*Trials^n,data = NameofTable,start = list(k=1,n=1))
+k<-coef(nls(Set2~k*Trials^n,data = NameofTable,start = list(k=1,n=1)))[1]
+n<-coef(nls(Set2~k*Trials^n,data = NameofTable,start = list(k=1,n=1)))[2]
+paste(names(NameofTable)[3],": y = ",round(k,2),"x^",round(n,2))
+
+#Repeat as above, replacing 'Set3' with the name of the third column of duration data.
+nls(Set3~k*Trials^n,data = NameofTable,start = list(k=1,n=1))
+k<-coef(nls(Set3~k*Trials^n,data = NameofTable,start = list(k=1,n=1)))[1]
+n<-coef(nls(Set3~k*Trials^n,data = NameofTable,start = list(k=1,n=1)))[2]
+paste(names(NameofTable)[4],": y = ",round(k,2),"x^",round(n,2))
+```
+
+##Plotting Power Curves
+In this section, plots are generated which display the fitted curves as defined in Method 2 of curve fitting. The first chunk displays a sample graph created from the example data: <br>
+```{r echo=FALSE}
+ggplot(data = TestTblLong, aes(x = Trials, y = Duration, color = Lego_Item))+ #In ggplot data, x, y, and series ("color") are defined.
+  geom_point(color = paste(LegoSetColor))+ #The geom_point plots points on the graph.
+  geom_line()+
+  ggtitle("LEGO Build Data and Fitted Curves EXAMPLE")+ #The geom_line plots lines on the graph.
+  stat_smooth(method = 'nls',  #stat_smooth calculates the nls function used in Method 2 and subsequently plots the fitted power curve for each column of data.
+                 formula = 'y~k*x^n', #This line defines that the fitted line will follow a power curve.
+                 method.args = list(start= c(k = 1,n = 1)), 
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100)
+
+ggplot(data = TestTblLong, aes(x = Trials, y = Duration, color = Lego_Item))+ #This plot generates only the fitted curves on a graph.
+  ggtitle("Fitted Power Curves EXAMPLE")+
+  stat_smooth(method = 'nls',
+                 formula = 'y~k*x^n',
+                 method.args = list(start= c(k = 1,n = 1)),
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100)
+
+```
+<br> The following plots display your test data and the corresponding power curves: <br>
+```{r echo=FALSE}
+#In the following ggplots, replace NameofTableLong with the name of the long version of your data frame. All other information should remain the same.
+ggplot(data = NameofTableLong, aes(x = Trials, y = Duration, color = Lego_Item))+
+  ggtitle("LEGO Build Data and Fitted Curves")+ #If desired, rename the plot by changing the text in the parenthesis on this line.
+  geom_point(color = paste(LegoSetColor))+
+  geom_line()+
+  stat_smooth(method = 'nls',
+                 formula = 'y~k*x^n',
+                 method.args = list(start= c(k = 1,n = 1)),
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100)
+
+ggplot(data = NameofTableLong, aes(x = Trials, y = Duration, color = Lego_Item))+
+  ggtitle("Fitted Power Curves")+
+  stat_smooth(method = 'nls',
+                 formula = 'y~k*x^n',
+                 method.args = list(start= c(k = 1,n = 1)),
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100)
+
+
+#The final step is to knit the code to an html document (the 'knit' button is on the tool bar at the top of this window). This should generate a html file that presents all of the data and plots that you have populated, as well as the examples. To remove the examples, either add a hash tag in front of each line, or delete the unwanted chunks of code. 
+```
