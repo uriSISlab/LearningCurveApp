@@ -10,10 +10,10 @@ tags:
 authors:
   -name: Nicholas D. Bernardo
   orcid: https://orcid.org/0000-0003-4104-8505
-  affiliation: “1”
+  affiliation: 1
   -name: Gretchen A. Macht, Ph.D.
   orcid: https://orcid.org/0000-0002-3222-1145
-  affiliation: “1”
+  affiliation: 1
 affiliations: Mechanical, Industrial &amp; Systems, University of Rhode Island
 date: 19 November 2019
 bibliography: paper.bib
