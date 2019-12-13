@@ -1,12 +1,12 @@
 ---
 title: Learning ‘Learning Curves’ with R Shiny
 tags:
-R
-human factors
-management
-learning curves
-power curve
-LEGO®️ construction
+-R
+-human factors
+-management
+-learning curves
+-power curve
+-LEGO®️ construction
 authors:
 name: Nicholas D. Bernardo
 orcid: https://orcid.org/0000-0003-4104-8505
