@@ -1,24 +1,17 @@
 ---
-title: 'Learning ‘Learning Curves’ with R Shiny'
-tags:
-  -R
-  -human factors
-  -management
-  -learning curves
-  -power curve
-  -LEGO&reg; construction
+title: "Learning 'Learning Curves' with R Shiny"
 authors:
   -name: Nicholas D. Bernardo
-  orcid: 0000-0003-4104-8505
-  affiliation: 1
+  affiliation: '1'
+  orcid: https://orcid.org/0000-0003-4104-8505
   -name: Gretchen A. Macht, Ph.D.
   orcid: 0000-0002-3222-1145
   affiliation: 1
-affiliations: 
-  -name: Mechanical, Industrial &amp; Systems, University of Rhode Island
-  index: 1
-date: 19 November 2019
+date: "19 November 2019"
+output: pdf_document
 bibliography: paper.bib
+tags: -R -human factors -management -learning curves -power curve -LEGO&reg; construction
+affiliations: Mechanical, Industrial &amp; Systems, University of Rhode Island
 ---
 #Summary
 Inherent in training individuals to perform a task is the concept of learning and forgetting, well knowing that each worker has certain levels of cognitive ability and experience. When assessing a production-based environment, to effectively maximize the output of that process, workers should be selected and assigned based on their skills and abilities (i.e., ''fitting the job to the human'') to a specific task (i.e., worker-task) [@Carnahan:2000; @Nembhard:2001; @Nembhard:2007]. Based on the cross-training literature, the best policy is for workers to learn 2-3 tasks [@Nembhard:2007] To completely understand the functionality of a worker-task, an analysis of their associated learning curves are required. 
