@@ -40,11 +40,11 @@ While learning curves can be calculated by hand, estimations for power curve fit
 While not directly engaging students in coding, the source code, as well as an R Markdown activity replicating the generation of a learning curve, is provided to students who are interested in the backend of the application. This may encourage initial student engagement in using coding languages at various ages (i.e., K-12 or higher education) to present information and projects in a more dynamic and creative way.
 
 #Materials
-For LEGO&reg; sets, please see the following links:
-Blue: CLASSIC - Blue Creativity Box (#10706) with 78 pieces for ages 4-99. https://www.lego.com/en-us/product/blue-creativity-box-10706
-Red: CLASSIC - Red Creativity Box (#10707) with 55 pieces for ages 4-99. https://www.lego.com/en-us/product/red-creativity-box-10707
-Green: CLASSIC - Green Creativity Box (#10708) with 66 pieces for ages 4-99. https://www.lego.com/en-us/product/green-creativity-box-10708
-Orange: CLASSIC - Orange Creativity Box (#10709) with 60 pieces for ages 4-99. https://www.lego.com/en-us/product/orange-creativity-box-10709
+For LEGO&reg; sets, please see the following links: <br>
+Blue: CLASSIC - Blue Creativity Box (#10706) with 78 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/blue-creativity-box-10706 <br>
+Red: CLASSIC - Red Creativity Box (#10707) with 55 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/red-creativity-box-10707 <br>
+Green: CLASSIC - Green Creativity Box (#10708) with 66 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/green-creativity-box-10708 <br>
+Orange: CLASSIC - Orange Creativity Box (#10709) with 60 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/orange-creativity-box-10709
 
 #Acknowledgements
 Thank you to the students of the University of Rhode Island, ''Introduction to Human Factors & Ergonomics'' course and a local elementary school STEAM night for assisting with testing and validation of the app. Special thank you to Dr. Rachel Schwartz for providing support and advice throughout the development process of these applications.
