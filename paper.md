@@ -16,7 +16,7 @@ orcid: https://orcid.org/0000-0002-3222-1145
 affiliation: “1”
 affiliations: Mechanical, Industrial & Systems, University of Rhode Island
 date: 19 November 2019
-bibliography: paper.bib
+
 ---
 #Summary
 Inherent in training individuals to perform a task is the concept of learning and forgetting, well knowing that each worker has certain levels of cognitive ability and experience. When assessing a production-based environment, to effectively maximize the output of that process, workers should be selected and assigned based on their skills and abilities (i.e., “fitting the job to the human”) to a specific task (i.e., worker-task) [@Carnahan:2000; @Nembhard:2001; @Nembhard:2007]. Based on the cross-training literature, the best policy is for workers to learn 2-3 tasks [@Nembhard:2007] To completely understand the functionality of a worker-task, an analysis of their associated learning curves are required. 
