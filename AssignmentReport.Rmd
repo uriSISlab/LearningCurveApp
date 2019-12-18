@@ -1,0 +1,152 @@
+---
+title: "Learning Curve Report"
+output: html_document
+params: 
+  n: character
+  Tbl: data.frame
+  dtlong: data.frame
+  SetTbl: data.frame
+  indColor: NA
+  StudentName: character
+  DF2: data.frame
+author: "`r params$StudentName`"
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+## Lego Set Color 
+
+```{r echo=FALSE}
+params$n
+```
+
+## Timing Data Table
+
+```{r echo=FALSE}
+params$Tbl
+```
+
+
+## Learning Curve Plots
+###**Individual Graphs**
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+   
+ggplot(data =params$Tbl,aes(params$Tbl[,1],params$Tbl[,2]))+
+     geom_point(color = as.character(params$n))+
+     geom_line()+
+     ggtitle(paste(names(params$Tbl)[2]))+
+     theme(plot.title = element_text(size=20, hjust = .5))+
+     xlab("Trials")+
+     ylab("Duration")+
+     scale_y_continuous(expand=c(.1,.1),limits = c(min(params$Tbl[,2]),NA))+
+     scale_x_continuous(breaks = seq(1,16,1))+
+     stat_smooth(method = 'nls',
+                 formula = 'y~a*x^b',
+                 method.args = list(start= c(a = 1,b=1)),
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100,
+                 color="magenta")
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+ggplot(data =params$Tbl,aes(params$Tbl[,1],params$Tbl[,3]))+
+     geom_point(color = as.character(params$n))+
+     geom_line()+
+     ggtitle(paste(names(params$Tbl)[3]))+
+     theme(plot.title = element_text(size=20, hjust = .5))+
+     xlab("Trials")+
+     ylab("Duration")+
+     scale_y_continuous(expand=c(.1,.1),limits = c(min(params$Tbl[,3]),NA))+
+     scale_x_continuous(breaks = seq(1,16,1))+
+     stat_smooth(method = 'nls',
+                 formula = 'y~a*x^b',
+                 method.args = list(start= c(a = 1,b=1)),
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100,
+                 color="magenta")
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+ggplot(data =params$Tbl,aes(params$Tbl[,1],params$Tbl[,4]))+
+     geom_point(color = as.character(params$n))+
+     geom_line()+
+     ggtitle(paste(names(params$Tbl)[4]))+
+     theme(plot.title = element_text(size=20, hjust = .5))+
+     xlab("Trials")+
+     ylab("Duration")+
+     scale_y_continuous(expand=c(.1,.1),limits = c(min(params$Tbl[,4]),NA))+
+     scale_x_continuous(breaks = seq(1,16,1))+
+     stat_smooth(method = 'nls',
+                 formula = 'y~a*x^b',
+                 method.args = list(start= c(a = 1,b=1)),
+                 se=FALSE,
+                 fullrange = TRUE,
+                 n=100,
+                 color="magenta")
+```
+
+
+###**Combined Graphs**
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+   ggplot(data = params$dtlong,aes(Trial,Duration,color=Lego))+
+     geom_point(aes(shape = Lego),color = as.character(params$n))+
+     geom_line()+
+     ggtitle(paste(params$n," Set: Data"))+
+     theme(plot.title = element_text(size=20, hjust = .5))+
+     xlab("Trials")+
+     scale_y_continuous(expand=c(.1,.1),limits = c(min(params$dtlong[,3]),NA))+
+     scale_x_continuous(breaks = seq(1,16,1))
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+if(sum(params$Tbl[,2])==0 || sum(params$Tbl[,3])==0 || sum(params$Tbl[,4])==0) {   
+ ggplot(data = params$dtlong,aes(Trial,Duration,color=Lego))+
+       ggtitle(paste(params$n," Set: Power Curves (INCOMPLETE DATA SET)"))+
+       theme(plot.title = element_text(size=20, hjust = .5))+
+       xlab("Trials")+
+       scale_y_continuous(expand=c(.1,.1),limits = c(min(params$dtlong[,3]),NA))+
+       scale_x_continuous(breaks = seq(1,16,1))
+} else {
+  ggplot(data = params$dtlong,aes(Trial,Duration,color=Lego))+
+       ggtitle(paste(params$n," Set: Power Curves"))+
+       theme(plot.title = element_text(size=20, hjust = .5))+
+       xlab("Trials")+
+       scale_y_continuous(expand=c(.1,.1),limits = c(min(params$dtlong[,3]),NA))+
+       scale_x_continuous(breaks = seq(1,16,1))+ 
+       stat_smooth(method = 'nls',formula = 'y~a*x^b',method.args = list(start= c(a = 1,b=1)),se=FALSE,fullrange = TRUE,n=100)
+ 
+}
+```
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+   ggplot(data = params$dtlong,aes(Trial,Duration,color=Lego))+
+       geom_point(aes(shape = Lego),color = as.character(params$n))+
+       geom_line()+
+       ggtitle(paste(params$n," Set: Data and Power Curves"))+
+       theme(plot.title = element_text(size=20, hjust = .5))+
+       xlab("Trials")+
+       scale_y_continuous(expand=c(.1,.1),limits = c(min(params$dtlong[,3]),NA))+
+       scale_x_continuous(breaks = seq(1,16,1))+
+       stat_smooth(method = 'nls',formula = 'y~a*x^b',method.args = list(start= c(a = 1,b=1)),se=FALSE,fullrange = TRUE,n=100)
+```
+
+
+
+## Equations
+
+**`r as.character(params$SetTbl[1,params$n])`**: y = `r if(sum(params$Tbl[,2])==0){paste("0")} else {round(coef(nls(y1~a*x^b,data = params$DF2,start = list(a=1,b=1)))[1],4)}` x ^(`r if(sum(params$Tbl[,2])==0){paste("0")} else{ round(coef(nls(y1~a*x^b,data = params$DF2,start = list(a=1,b=1)))[2],4)}`) 
+
+**`r as.character(params$SetTbl[2,params$n])`**: y = `r if(sum(params$Tbl[,3])==0){paste("0")} else{round(coef(nls(y2~a*x^b,data = params$DF2,start = list(a=1,b=1)))[1],4)}` x ^(`r if(sum(params$Tbl[,3])==0){paste("0")} else{round(coef(nls(y2~a*x^b,data = params$DF2,start = list(a=1,b=1)))[2],4)}`) 
+
+**`r as.character(params$SetTbl[3,params$n])`**: y = `r if(sum(params$Tbl[,4])==0){paste("0")} else{round(coef(nls(y3~a*x^b,data = params$DF2,start = list(a=1,b=1)))[1],4)}` x ^(`r if(sum(params$Tbl[,4])==0){paste("0")} else{round(coef(nls(y3~a*x^b,data = params$DF2,start = list(a=1,b=1)))[2],4)}`) 
