@@ -43,12 +43,19 @@ While not directly engaging students in coding, the source code, as well as an R
 
 # Materials
 
-For LEGO&reg; sets, please see the following links: <br>
-<br> Blue: CLASSIC - Blue Creativity Box (#10706) with 78 pieces for ages 4-99. <br>
-<br> https://www.lego.com/en-us/product/blue-creativity-box-10706 <br>
-Red: CLASSIC - Red Creativity Box (#10707) with 55 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/red-creativity-box-10707 <br>
-Green: CLASSIC - Green Creativity Box (#10708) with 66 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/green-creativity-box-10708 <br>
-Orange: CLASSIC - Orange Creativity Box (#10709) with 60 pieces for ages 4-99. <br> https://www.lego.com/en-us/product/orange-creativity-box-10709
+For LEGO&reg; sets, please see the following links:
+
+Blue: CLASSIC - Blue Creativity Box (#10706) with 78 pieces for ages 4-99. 
+https://www.lego.com/en-us/product/blue-creativity-box-10706
+
+Red: CLASSIC - Red Creativity Box (#10707) with 55 pieces for ages 4-99.
+https://www.lego.com/en-us/product/red-creativity-box-10707 
+
+Green: CLASSIC - Green Creativity Box (#10708) with 66 pieces for ages 4-99. 
+https://www.lego.com/en-us/product/green-creativity-box-10708 
+
+Orange: CLASSIC - Orange Creativity Box (#10709) with 60 pieces for ages 4-99.
+https://www.lego.com/en-us/product/orange-creativity-box-10709
 
 # Acknowledgements
 
